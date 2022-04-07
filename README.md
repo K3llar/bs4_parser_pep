@@ -8,7 +8,7 @@
 ## Как пользоваться
 - Скачать проект:
 ```
-https://github.com/K3llar/bs4_parser.git
+https://github.com/K3llar/bs4_parser_pep.git
 ```
 - Перейти в директорию проекта:
 ```
