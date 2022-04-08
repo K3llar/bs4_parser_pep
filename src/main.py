@@ -109,7 +109,7 @@ def pep(session):
     total_by_status = collections.defaultdict(int)
     results = [('Статус', 'Количество')]
 
-    for tr_tag in tqdm(tr_tags):
+    for tr_tag in tqdm(tr_tags, colour='magenta'):
         td_tag = find_tag(tr_tag, 'td')
         preview_status = td_tag.text[1:]
         href = find_tag(tr_tag, 'a')['href']
@@ -127,7 +127,14 @@ def pep(session):
         status = pep_status_table.find('dt', text='Status')
         pep_status = str(status.find_next_sibling('dd').string)
         total_by_status[preview_status] += 1
-        if pep_status not in EXPECTED_STATUS[preview_status]:
+
+        try:
+            status_preview = EXPECTED_STATUS.get(preview_status)
+        except KeyError:
+            logging.warning(
+                f'Ключ {preview_status} отсутствует в базе'
+            )
+        if pep_status not in status_preview:
             logging.info(f'Несовпадающие статусы:\n {pep_link}')
 
     total = 0
