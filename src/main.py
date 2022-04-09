@@ -129,7 +129,7 @@ def pep(session):
         total_by_status[preview_status] += 1
 
         try:
-            status_preview = EXPECTED_STATUS.get(preview_status)
+            status_preview = EXPECTED_STATUS[preview_status]
         except KeyError:
             logging.warning(
                 f'Ключ {preview_status} отсутствует в базе'
